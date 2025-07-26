@@ -1,13 +1,26 @@
 
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Search, ShoppingBag, User } from "lucide-react";
 import HamburgerIcon from "@/components/ui/HamburgerIcon";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import DrawerSidebar from "@/components/DrawerSidebar";
+import { useAuth } from "@/contexts/AuthContext";
 
 const Header = () => {
   const [drawerOpen, setDrawerOpen] = useState(false);
+  const navigate = useNavigate();
+  const { user } = useAuth();
+
+  const handleUserClick = () => {
+    if (user) {
+      setDrawerOpen(true);
+    } else {
+      navigate('/login');
+    }
+  };
+
   return (
     <>
       <header className="sticky top-0 z-50 glass-effect border-b border-border">
@@ -50,7 +63,7 @@ const Header = () => {
             <Button variant="ghost" size="icon" className="hidden lg:flex">
               <Search className="h-5 w-5" />
             </Button>
-            <Button variant="ghost" size="icon">
+            <Button variant="ghost" size="icon" onClick={handleUserClick}>
               <User className="h-5 w-5" />
             </Button>
             <Button variant="ghost" size="icon" className="relative">

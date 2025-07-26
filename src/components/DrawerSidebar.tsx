@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import { motion } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 import { 
   X, 
   User, 
@@ -25,6 +26,7 @@ interface DrawerSidebarProps {
 
 const DrawerSidebar: React.FC<DrawerSidebarProps> = ({ isOpen, onClose }) => {
   const { user, logout } = useAuth();
+  const navigate = useNavigate();
 
   const handleLogout = () => {
     logout();
@@ -32,6 +34,15 @@ const DrawerSidebar: React.FC<DrawerSidebarProps> = ({ isOpen, onClose }) => {
     toast.success('Logged out successfully');
   };
 
+  const handleSignIn = () => {
+    onClose();
+    navigate('/login');
+  };
+
+  const handleCreateAccount = () => {
+    onClose();
+    navigate('/signup');
+  };
   const menuItems = [
     {
       icon: User,
@@ -193,11 +204,11 @@ const DrawerSidebar: React.FC<DrawerSidebarProps> = ({ isOpen, onClose }) => {
                         </Button>
                       ) : (
                         <div className="space-y-2">
-                          <Button className="w-full" onClick={onClose}>
+                          <Button className="w-full" onClick={handleSignIn}>
                             <User className="h-4 w-4 mr-2" />
                             Sign In
                           </Button>
-                          <Button variant="outline" className="w-full" onClick={onClose}>
+                          <Button variant="outline" className="w-full" onClick={handleCreateAccount}>
                             Create Account
                           </Button>
                         </div>
