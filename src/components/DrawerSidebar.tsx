@@ -43,6 +43,16 @@ const DrawerSidebar: React.FC<DrawerSidebarProps> = ({ isOpen, onClose }) => {
     onClose();
     navigate('/signup');
   };
+
+  const handleSupportClick = () => {
+    onClose();
+    navigate('/support');
+  };
+
+  const handleAdminClick = () => {
+    onClose();
+    navigate('/admin');
+  };
   const menuItems = [
     {
       icon: User,
@@ -87,10 +97,7 @@ const DrawerSidebar: React.FC<DrawerSidebarProps> = ({ isOpen, onClose }) => {
     {
       icon: HelpCircle,
       label: 'Support',
-      onClick: () => {
-        toast.info('Support page coming soon');
-        onClose();
-      }
+      onClick: handleSupportClick
     }
   ];
 
@@ -173,6 +180,20 @@ const DrawerSidebar: React.FC<DrawerSidebarProps> = ({ isOpen, onClose }) => {
                     )}
 
                     {/* Menu Items */}
+                
+                {/* Admin Button */}
+                {user?.role === 'admin' && (
+                  <div className="mt-4">
+                    <Button
+                      onClick={handleAdminClick}
+                      variant="outline"
+                      className="w-full justify-start border-primary text-primary hover:bg-primary hover:text-primary-foreground"
+                    >
+                      <Settings className="h-4 w-4 mr-2" />
+                      Admin Panel
+                    </Button>
+                  </div>
+                )}
                     <div className="flex-1 overflow-y-auto">
                       <nav className="p-4 space-y-2">
                         {menuItems.map((item, index) => (
