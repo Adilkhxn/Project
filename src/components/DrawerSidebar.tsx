@@ -51,7 +51,7 @@ const DrawerSidebar: React.FC<DrawerSidebarProps> = ({ isOpen, onClose }) => {
 
   const handleAdminClick = () => {
     onClose();
-    navigate('/admin');
+    navigate('/admin/dashboard');
   };
   const menuItems = [
     {
